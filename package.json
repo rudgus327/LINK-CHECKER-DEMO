@@ -1,0 +1,13 @@
+{
+    "name":"link-checker-demo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "check-links":"node index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license":"ISC"
+
+}
