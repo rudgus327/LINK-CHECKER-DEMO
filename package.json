@@ -1,13 +1,16 @@
 {
-    "name":"link-checker-demo",
+    "name": "link-checker-demo",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
-        "check-links":"node index.js"
+        "check-links": "node index.mjs"
     },
     "keywords": [],
     "author": "",
-    "license":"ISC"
-
+    "license": "ISC",
+    "devDependencies": {
+        "chalk": "^5.3.0",
+        "linkinator": "^5.0.2"
+    }
 }
