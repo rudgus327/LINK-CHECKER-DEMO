@@ -3,9 +3,10 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
+    "proxy": "http://localhost:9999",
     "scripts": {
         "check-links": "node index.mjs",
-        "check-servers": "node server.mjs"
+        "check-server": "node server.mjs"
 
     },
     "keywords": [],

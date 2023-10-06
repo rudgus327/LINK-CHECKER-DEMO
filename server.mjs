@@ -1,24 +1,48 @@
-import express from"express"
-
+import express from "express"
+import {lChecker} from "./index.mjs" // 
+import cors from "express"
 const app = express();
 
 /* localhost:3000/ 접속시 나올 메시지 */
 app.get("/", (request, response) => { 
+  
   response.send(`<h1>코드짜는 문과녀</h1>`);
 });
 
 /* localhost:3000/main 접속시 나올 메시지 */
 app.get("/main", (request, response) => {  
-  response.send(`
-    <h1>Hello World</h1>
-    <p>This is main page</p>
-    `);
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers","x-requested-with");
+  response.header("Access-Control-Allow-Methods","POST, GET, OPTIONS, DELETE");
+  // var url = request.params('url');
+  var url = request.query.url;
+  var result = "url확인";
+  var html = ``;
+  console.log(result+":"+url);
+  if(url !== undefined){
+    console.log(url);
+    lChecker(url);
+  }
+  response.send(
+    // `
+    // <h1>Hello World</h1>
+    // <p>This is main page</p>
+    // `
+    html
+    );
 });
 
 /* localhost:3000/ 혹은 localhost:3000/main 외의
 get하지 않은 페이지 접속시 나올 메시지. */
-app.use((request, response) => {
-  response.send(`<h1>Sorry, page not found :(</h1>`);
+// app.use((request, response) => {
+//   response.send(`<h1>Sorry, page not found :(</h1>`);
+// });
+
+app.use(function(req,res,next){
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers","x-requested-with");
+  res.header("Access-Control-Allow-Methods","POST, GET, OPTIONS, DELETE");
+  next();
 });
 
 /* start : 3000포트에서 서버 구동 */
