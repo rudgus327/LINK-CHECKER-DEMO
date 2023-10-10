@@ -1,4 +1,4 @@
-import express from "express"
+import express, { json } from "express"
 import {lChecker} from "./index.mjs" // 
 import cors from "express"
 const app = express();
@@ -17,7 +17,7 @@ app.get("/main", (request, response) => {
   // var url = request.params('url');
   var url = request.query.url;
   var result = "url확인";
-  var html = ``;
+  var html = {test:"test"};
   console.log(result+":"+url);
   if(url !== undefined){
     console.log(url);
@@ -28,7 +28,7 @@ app.get("/main", (request, response) => {
     // <h1>Hello World</h1>
     // <p>This is main page</p>
     // `
-    html
+    JSON.stringify(html)
     );
 });
 
