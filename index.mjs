@@ -32,25 +32,39 @@ console.log("checker_test:"+url);
     })
 
     await checker.check({path: url, recurse :true });
-
+    var result = {};
+    var resultMsg = "success";
+    var arr = [];
+    
     if(brokenlinks.length > 0){
         console.log("");
         console.log(`Found ${brokenlinks.length} broken links:`);
         for(const brokenlink of brokenlinks){
-            console.log("");
-            console.log(brokenlink.url);
-            console.log('   ','STATUS',brokenlink.status);
-            console.log('   ','SOURCE',new URL(brokenlink.parent).pathname);
+            var linkData = {};
+            console.log(brokenlink);
+            linkData.url = brokenlink.url;    
+            linkData.status = brokenlink.status;    
+            linkData.state = brokenlink.state;    
+            linkData.parent = brokenlink.parent;    
+            linkData.source = new URL(brokenlink.parent).pathname;    
+            
+            arr.push(linkData);
         }
+        
+    }else{
+        resultMsg = "failed";
+
     }
 
+    result.resultMsg = resultMsg;
+    result.data = arr;
 
     console.log('');
-    console.log(`Checked ${pagesChecked.length} pages:`);
-    for(const page of pagesChecked){
-        console.log('   ',new URL(page).pathname);
-    }
+    // console.log(`Checked ${pagesChecked.length} pages:`);
+    // for(const page of pagesChecked){
+    //     console.log('   ',new URL(page).pathname);
+    // }
 
     // 리턴을 넣어주기 (03:10)
-    return "success"; 
+    return result; 
 }

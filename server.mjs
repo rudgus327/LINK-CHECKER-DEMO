@@ -16,21 +16,32 @@ app.get("/main", (request, response) => {
   response.header("Access-Control-Allow-Methods","POST, GET, OPTIONS, DELETE");
   // var url = request.params('url');
   var url = request.query.url;
-  var result = "url확인";
-  var html = {test:"test"};
-  console.log(result+":"+url);
+  var html = {};
+  
   if(url !== undefined){
-    console.log(url);
-    lChecker(url);
+    // console.log(url);
+    lChecker(url).then((result)=>{
+      console.log("result::"+JSON.stringify(result));
+      html = result;
+      response.send(
+        JSON.stringify(html)
+        );
+    }).catch((err)=>{
+      console.log(err);
+      html.resultMsg = "failed";
+      response.send(
+        JSON.stringify(html)
+        );
+    });
+
+    
   }
-  response.send(
-    // `
-    // <h1>Hello World</h1>
-    // <p>This is main page</p>
-    // `
-    JSON.stringify(html)
-    );
+  
+  
+
 });
+
+
 
 /* localhost:3000/ 혹은 localhost:3000/main 외의
 get하지 않은 페이지 접속시 나올 메시지. */
