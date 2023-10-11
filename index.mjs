@@ -31,7 +31,7 @@ console.log("checker_test:"+url);
         pagesChecked.push(url);
     })
 
-    await checker.check({path: url, recurse :true });
+    await checker.check({path: url, recurse :true,concurrency :2  });
     var result = {};
     var resultMsg = "success";
     var arr = [];
